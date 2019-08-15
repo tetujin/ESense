@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'ESense_Example' do
+  pod 'ESense', :path => '../'
+
+  target 'ESense_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
