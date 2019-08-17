@@ -74,6 +74,7 @@ manager.scan(timeout: SECOND)
 ```
 
 5. Handling sensor update events
+
 After connecting the device, you can listen the sensor change events via `ESenseSensrListener`. Please implement ESenseSensorListener in your class just like below.
 
 ```swift
