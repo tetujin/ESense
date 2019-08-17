@@ -56,6 +56,7 @@ extension YOUR_CLASS:ESenseconnectionListener{
 ```
 
 3. Create the ESenseManager instance
+
 Prepare a variable for `ESenseManager` as a class or static variable.
 ```swift
 var manager:ESenseManager? = nil
@@ -66,12 +67,14 @@ manager = ESenseManager(deviceName: "YOUR_ESENSE_NAME", listener: YOUR_CLASS)
 ```
 
 4. Scan and connect an eSense device
+
 For scanning an _eSense_ device, you can use `scan(timeout)` method. If `ESenseManager` finds an eSense device, `onDeviceFind(manager)`  method on `ESenseconnectionListener` is called. 
 ```swift
 manager.scan(timeout: SECOND)
 ```
 
 5. Handling sensor update events
+
 After connecing the device, you listen the sensor change events via `ESenseSensrListener`. Please implement `ESenseSensorListener` on your class just like below. 
 ```swift
 extension YOUR_CLASS:ESenseSensorListener{
@@ -86,6 +89,7 @@ manager.registerSensorListener(YOUR_CLASS, hz: 10)
 ```
 
 6. Handling eSense device events
+
 In addition, you can handle _eSense_ other events (battery, button, and config related events) using `ESenseEventListener`. Please implement `ESenseEventListener` on your class. 
 ```swift
 extension YOUR_CLASS:ESenseEventListener{
