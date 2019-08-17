@@ -27,12 +27,12 @@ pod 'ESense'
 
 ## Use eSense Library
 1. Import the library in your iOS project
-```
+```swift
 import ESense
 ```
 
 2. Implement `ESenseconnectionListener` on your class
-```
+```swift
 extension YOUR_CLASS:ESenseconnectionListener{
     func onDeviceFound(_ manager: ESenseManager) {
         // YOUR CODE HERE
@@ -57,23 +57,23 @@ extension YOUR_CLASS:ESenseconnectionListener{
 
 3. Create the ESenseManager instance
 Prepare a variable for `ESenseManager` as a class or static variable.
-```
+```swift
 var manager:ESenseManager? = nil
 ```
 Initialize an `ESenseManager` class using a target device name and a class which is implemented the `ESenseconnectionListener`.
-```
+```swift
 manager = ESenseManager(deviceName: "YOUR_ESENSE_NAME", listener: YOUR_CLASS)
 ```
 
 4. Scan and connect an eSense device
 For scanning an _eSense_ device, you can use `scan(timeout)` method. If `ESenseManager` finds an eSense device, `onDeviceFind(manager)`  method on `ESenseconnectionListener` is called. 
-```
+```swift
 manager.scan(timeout: SECOND)
 ```
 
 5. Handling sensor update events
 After connecing the device, you listen the sensor change events via `ESenseSensrListener`. Please implement `ESenseSensorListener` on your class just like below. 
-```
+```swift
 extension YOUR_CLASS:ESenseSensorListener{
     func onSensorChanged(_ evt: ESenseEvent) {
         // YOUR CODE HERE
@@ -81,13 +81,13 @@ extension YOUR_CLASS:ESenseSensorListener{
 }
 ```
 Finally, you can set the `ESenseSensorListener` to your `ESenseManager` with a sampling late (`hz`).
-```
+```swift
 manager.registerSensorListener(YOUR_CLASS, hz: 10)
 ```
 
 6. Handling eSense device events
 In addition, you can handle _eSense_ other events (battery, button, and config related events) using `ESenseEventListener`. Please implement `ESenseEventListener` on your class. 
-```
+```swift
 extension YOUR_CLASS:ESenseEventListener{
     func onBatteryRead(_ voltage: Double) {
         // YOUR CODE HERE
@@ -116,12 +116,12 @@ extension YOUR_CLASS:ESenseEventListener{
 ```
 
 Also, you can registe the implement listener by `registerEventListener(ESenseEventListener)` method on `ESenseManager` class.
-```
+```swift
 manager.registerEventListener(self)
 ```
 
 Executing read operations will trigger events on `ESenseEventListener`.
-```
+```swift
 manager.getBatteryVoltage()
 manager.getAccelerometerOffset()
 manager.getDeviceName()
