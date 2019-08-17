@@ -74,8 +74,8 @@ manager.scan(timeout: SECOND)
 ```
 
 5. Handling sensor update events
+After connecting the device, you can listen the sensor change events via `ESenseSensrListener`. Please implement ESenseSensorListener in your class just like below.
 
-After connecing the device, you listen the sensor change events via `ESenseSensrListener`. Please implement `ESenseSensorListener` on your class just like below. 
 ```swift
 extension YOUR_CLASS:ESenseSensorListener{
     func onSensorChanged(_ evt: ESenseEvent) {
@@ -83,7 +83,7 @@ extension YOUR_CLASS:ESenseSensorListener{
     }
 }
 ```
-Finally, you can set the `ESenseSensorListener` to your `ESenseManager` with a sampling late (`hz`).
+Finally, you can set the `ESenseSensorListener` into your `ESenseManager` with a sampling late (`hz`).
 ```swift
 manager.registerSensorListener(YOUR_CLASS, hz: 10)
 ```
