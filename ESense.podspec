@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ESense'
-  s.version          = '0.1.0'
-  s.summary          = 'A short description of ESense.'
+  s.version          = '0.1.1'
+  s.summary          = 'This library allows us to use [eSense](http://www.esense.io/) (earable computing platform) on iOS'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,13 +18,14 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+ [eSense](http://www.esense.io/) is a multi-sensory earable platform for personal-scale behavioural analytics research. It is a True Wireless Stereo (TWS) earbud augmented with a 6-axis inertial motion unit, a microphone, and dual-mode Bluetooth (Bluetooth Classic and Bluetooth Low Energy). This library allows us to easily connect and communicate eSense on iOS.
+
                        DESC
 
   s.homepage         = 'https://github.com/tetujin/ESense'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'tetujin' => 'tetujin@ht.sfc.keio.ac.jp' }
+  s.author           = { 'Yuuki Nishiyama' => 'yuukin@iis.u-tokyo.ac.jp' }
   s.source           = { :git => 'https://github.com/tetujin/ESense.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
@@ -35,6 +36,8 @@ TODO: Add long description of the pod here.
   # s.resource_bundles = {
   #   'ESense' => ['ESense/Assets/*.png']
   # }
+
+  s.swift_versions = '4.0'
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   s.frameworks = 'UIKit', 'CoreBluetooth'
