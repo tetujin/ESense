@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F4B8872230524D500173D19 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F4B8871230524D500173D19 /* CoreBluetooth.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
@@ -30,8 +31,9 @@
 /* Begin PBXFileReference section */
 		2108776BEDC7EA4C33F86718 /* Pods_ESense_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ESense_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		23D52DDB380D93D133930F3B /* Pods-ESense_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ESense_Tests.debug.xcconfig"; path = "Target Support Files/Pods-ESense_Tests/Pods-ESense_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		28ADEB38844F331E85C51ADF /* ESense.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = ESense.podspec; path = ../ESense.podspec; sourceTree = "<group>"; };
-		3D578273D7B9E5546BFA1404 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		28ADEB38844F331E85C51ADF /* ESense.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = ESense.podspec; path = ../ESense.podspec; sourceTree = "<group>"; };
+		3D578273D7B9E5546BFA1404 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		4F4B8871230524D500173D19 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		607FACD01AFB9204008FA782 /* ESense_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ESense_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -43,7 +45,7 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		6BD466AE1D71F5E8BBB98700 /* Pods-ESense_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ESense_Example.debug.xcconfig"; path = "Target Support Files/Pods-ESense_Example/Pods-ESense_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		8EEA870A798D91C531952539 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		8EEA870A798D91C531952539 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		C186F4425865745A9CC83862 /* Pods_ESense_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ESense_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C30E7E21DDC662393B2FA9EF /* Pods-ESense_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ESense_Tests.release.xcconfig"; path = "Target Support Files/Pods-ESense_Tests/Pods-ESense_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		DB8D2FCE3C36079B08B589F4 /* Pods-ESense_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ESense_Example.release.xcconfig"; path = "Target Support Files/Pods-ESense_Example/Pods-ESense_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -54,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F4B8872230524D500173D19 /* CoreBluetooth.framework in Frameworks */,
 				80AB81D8EDC845E1061C9597 /* Pods_ESense_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -142,6 +145,7 @@
 		98DDF4C310B63C3B0BA85656 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4F4B8871230524D500173D19 /* CoreBluetooth.framework */,
 				C186F4425865745A9CC83862 /* Pods_ESense_Example.framework */,
 				2108776BEDC7EA4C33F86718 /* Pods_ESense_Tests.framework */,
 			);
@@ -156,7 +160,6 @@
 				23D52DDB380D93D133930F3B /* Pods-ESense_Tests.debug.xcconfig */,
 				C30E7E21DDC662393B2FA9EF /* Pods-ESense_Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -213,10 +216,17 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = FH352PYMNC;
 						LastSwiftMigration = 0900;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = FH352PYMNC;
 						LastSwiftMigration = 0900;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
@@ -227,6 +237,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -419,7 +430,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -465,7 +476,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -478,7 +489,9 @@
 			baseConfigurationReference = 6BD466AE1D71F5E8BBB98700 /* Pods-ESense_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = FH352PYMNC;
 				INFOPLIST_FILE = ESense/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
@@ -493,7 +506,9 @@
 			baseConfigurationReference = DB8D2FCE3C36079B08B589F4 /* Pods-ESense_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = FH352PYMNC;
 				INFOPLIST_FILE = ESense/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
@@ -507,6 +522,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 23D52DDB380D93D133930F3B /* Pods-ESense_Tests.debug.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = FH352PYMNC;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -529,6 +545,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C30E7E21DDC662393B2FA9EF /* Pods-ESense_Tests.release.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = FH352PYMNC;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",

@@ -1,0 +1,6 @@
+framework module ESense {
+  umbrella header "ESense-umbrella.h"
+
+  export *
+  module * { export * }
+}

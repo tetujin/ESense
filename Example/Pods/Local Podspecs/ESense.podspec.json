@@ -1,0 +1,26 @@
+{
+  "name": "ESense",
+  "version": "0.1.0",
+  "summary": "A short description of ESense.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/tetujin/ESense",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "tetujin": "tetujin@ht.sfc.keio.ac.jp"
+  },
+  "source": {
+    "git": "https://github.com/tetujin/ESense.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "10.0"
+  },
+  "source_files": "ESense/Classes/**/*",
+  "frameworks": [
+    "UIKit",
+    "CoreBluetooth"
+  ]
+}
