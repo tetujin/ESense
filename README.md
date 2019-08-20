@@ -7,8 +7,6 @@
 
 This library allows us to use [eSense](http://www.esense.io/) (earable computing platform) on iOS easily. This library is inspired by eSense library for Android which is developed by Pervasive Systems team at [Nokia Bell Labs](https://www.bell-labs.com/) Cambridge.
 
-Yuuki Nishiyama, 
-
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.

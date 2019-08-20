@@ -392,8 +392,8 @@ public class ESenseManager: NSObject{
      *         <code>false</code> otherwise
      */
     public func disconnect() -> Bool {
-        if(isConnected()) {
-            if let device = mDevice, let manager = mBluetoothManager{
+        if isConnected() {
+            if let device = mDevice, let manager = self.scanner?.mBluetoothLeScanner{
                 manager.cancelPeripheralConnection(device)
                 return true
             }
