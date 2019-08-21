@@ -12,13 +12,13 @@ public class ESenseConfig: NSObject {
     /**
      * Gyroscope full scale range in +-degrees/second
      */
-    public enum GyroRange {
+    public enum GyroRange:Int8 {
         case DEG_250
         case DEG_500
         case DEG_1000
         case DEG_2000
         
-        static let values = [DEG_250, DEG_500, DEG_1000, DEG_2000]
+        public static let values = [DEG_250, DEG_500, DEG_1000, DEG_2000]
     
         func ordinal() -> Int{
             return ordinal(self)
@@ -32,18 +32,24 @@ public class ESenseConfig: NSObject {
             }
             return 0
         }
+        
+        public var label: String {
+            let labels = ["DEG_250", "DEG_500", "DEG_1000", "DEG_2000"]
+            return labels[ordinal(self)]
+        }
     }
     
     /**
      * Accelerometer full scale range in +-g
      */
-    public enum AccRange {
+    public enum AccRange:Int8 {
         case G_2
         case G_4
         case G_8
         case G_16
         
-        static let values = [G_2, G_4, G_8, G_16]
+        public static let values = [G_2, G_4, G_8, G_16]
+        
         
         func ordinal() -> Int{
             return ordinal(self)
@@ -57,12 +63,17 @@ public class ESenseConfig: NSObject {
             }
             return 0
         }
+        
+        public var label:String {
+            let labels = ["G_2", "G_4", "G_8", "G_16"]
+            return labels[ordinal(self)]
+        }
     }
     
     /**
      * Gyroscope low pass filter configuration. Each value except DISABLED represents the bandwidth of the filter in Hz.
      */
-    public enum GyroLPF {
+    public enum GyroLPF:Int8 {
         case BW_250
         case BW_184
         case BW_92
@@ -73,7 +84,7 @@ public class ESenseConfig: NSObject {
         case BW_3600
         case DISABLED
         
-        static let values = [BW_250, BW_184, BW_92, BW_41, BW_20, BW_10, BW_5, BW_3600, DISABLED]
+        public static let values = [BW_250, BW_184, BW_92, BW_41, BW_20, BW_10, BW_5, BW_3600, DISABLED]
         
         func ordinal() -> Int{
             return ordinal(self)
@@ -87,12 +98,17 @@ public class ESenseConfig: NSObject {
             }
             return 0
         }
+        
+        public var label:String {
+            let labels = ["BW_250", "BW_184", "BW_92", "BW_41", "BW_20", "BW_10", "BW_5", "BW_3600", "DISABLED"]
+            return labels[ordinal(self)]
+        }
     }
     
     /**
      * Accelerometer low pass filter configuration. Each value except DISABLED represents the bandwidth of the filter in Hz.
      */
-    public enum AccLPF {
+    public enum AccLPF:Int8 {
         case BW_460
         case BW_184
         case BW_92
@@ -102,7 +118,7 @@ public class ESenseConfig: NSObject {
         case BW_5
         case DISABLED
         
-        static let values = [BW_460, BW_184, BW_92, BW_41, BW_20, BW_10, BW_5, DISABLED]
+        public static let values = [BW_460, BW_184, BW_92, BW_41, BW_20, BW_10, BW_5, DISABLED]
         
         func ordinal() -> Int{
             return ordinal(self)
@@ -115,6 +131,11 @@ public class ESenseConfig: NSObject {
                 }
             }
             return 0
+        }
+        
+        public var label:String {
+            let labels = ["BW_460", "BW_184", "BW_92", "BW_41", "BW_20", "BW_10", "BW_5", "DISABLED"]
+            return labels[ordinal(self)]
         }
     }
     

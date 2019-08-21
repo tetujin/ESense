@@ -72,9 +72,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="00a-JQ-eCx">
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="rHq-gl-3Ul">
+                        <barButtonItem key="rightBarButtonItem" image="settings" id="rHq-gl-3Ul">
                             <connections>
-                                <segue destination="6i1-CW-dVe" kind="show" id="bxI-hQ-UmJ"/>
+                                <segue destination="6i1-CW-dVe" kind="show" identifier="toSettings" id="bxI-hQ-UmJ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -89,10 +89,10 @@
             </objects>
             <point key="canvasLocation" x="1071.2" y="133.5832083958021"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Settings View Controller-->
         <scene sceneID="XBm-jb-Csx">
             <objects>
-                <tableViewController id="6i1-CW-dVe" sceneMemberID="viewController">
+                <tableViewController id="6i1-CW-dVe" customClass="SettingsViewController" customModule="ESense_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="v8v-hU-ptJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -115,7 +115,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Lw-cn-1Ng" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2090" y="136"/>
+            <point key="canvasLocation" x="1926" y="134"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="M7w-Ra-cTC">
@@ -136,4 +136,7 @@
             <point key="canvasLocation" x="132" y="133.5832083958021"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="settings" width="24" height="24"/>
+    </resources>
 </document>

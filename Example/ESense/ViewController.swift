@@ -20,21 +20,35 @@ class ViewController: UIViewController{
     @IBOutlet weak var connectButton: UIButton!
     
     var manager:ESenseManager? = nil
-    var sensingFrequency:UInt8 = 30 // hz
-    var sensorName = "eSense-0063"
-    var connectionTimeout = 60
     var sensorConfig:ESenseConfig?
+    var connectionTimeout = 60
+    var sensingFrequency:UInt8 = 1 // hz
+    var sensorName = ""
+    var label = ""
+    var fileName = "eSense.csv"
+    var isSaveCSV:Bool = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        let lineAccXYZ = lineDataWithCount(300, labels: ["Acc-X","Acc-Y","Acc-Z"])
-        setupLineChart(accView, data: lineAccXYZ)
         
-        let lineGyroXYZ = lineDataWithCount(300, labels: ["Gyro-X","Gyro-Y","Gyro-Z"])
-        setupLineChart(gyroView, data: lineGyroXYZ)
+        let userDefaults = UserDefaults.standard
+        if !userDefaults.bool(forKey: "INIT_STATUS") {
+            userDefaults.set(true, forKey: "INIT_STATUS")
+            userDefaults.setAccRange(.G_4,        forKey: SettingKeys.accG.rawValue)
+            userDefaults.setGyroRange(.DEG_1000,  forKey: SettingKeys.gyroDEG.rawValue)
+            userDefaults.setAccLPF(.BW_5,         forKey: SettingKeys.accLPF.rawValue)
+            userDefaults.setGyroLPF(.BW_5,        forKey: SettingKeys.gyroLPF.rawValue)
+            userDefaults.set(5,             forKey: SettingKeys.sensingFrequency.rawValue)
+            userDefaults.set("eSense-0063", forKey: SettingKeys.name.rawValue)
+            userDefaults.set("",            forKey: SettingKeys.label.rawValue)
+            userDefaults.set("eSense.csv",  forKey: SettingKeys.csvFileName.rawValue)
+        }
         
-        sensorConfig = ESenseConfig(accRange: .G_8, gyroRange: .DEG_1000, accLPF: .BW_10, gyroLPF: .BW_10)
+        // Set a chart contents
+        setupLineChart(accView,  data: lineDataWithCount(300, labels: ["Acc-X","Acc-Y","Acc-Z"]))
+        setupLineChart(gyroView, data: lineDataWithCount(300, labels: ["Gyro-X","Gyro-Y","Gyro-Z"]))
+    
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,42 +66,48 @@ class ViewController: UIViewController{
         }else{
             self.startConnection()
         }
+    }
+    
+    @IBAction func didPushActionButton(_ sender: UIBarButtonItem) {
         
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            if identifier == "toSettings"{
+                if let vc = segue.destination as? SettingsViewController {
+                    vc.eSensrManager = self.manager
+                }
+            }
+        }
+    }
+    
+    override func didMove(toParentViewController parent: UIViewController?) {
+        if let label = UserDefaults.standard.string(forKey: SettingKeys.label.rawValue),
+            let name = UserDefaults.standard.string(forKey: SettingKeys.name.rawValue),
+            let fileName = UserDefaults.standard.string(forKey: SettingKeys.csvFileName.rawValue){
+            
+            self.label = label
+            self.sensorName = name
+            self.fileName = fileName
+            self.isSaveCSV = UserDefaults.standard.bool(forKey: SettingKeys.saveCSV.rawValue)
+        }
+    }
+    
     
 }
 
 extension ViewController{
     
     func startConnection(){
-        let alert = UIAlertController.init(title: "Please set your eSense name",
-                                           message: nil,
-                                           preferredStyle: .alert)
-        alert.addTextField { (textField) in
-            textField.text = self.sensorName
-        }
-        alert.addAction(UIAlertAction(title: "Start Scanning", style: .default, handler: { (action) in
-            if let textFileds = alert.textFields {
-                if let nameField = textFileds.first {
-                    if let name = nameField.text {
-                        self.navigationController?.title = name
-                        self.debugLabel.text = "Start Scanning: \(name)"
-                        
-                        //////////////////////////////
-                        // e.g. name = eSense-0063
-                        self.manager = ESenseManager(deviceName: name, listener: self)
-                        if let m = self.manager {
-                            print(m.connect(timeout: self.connectionTimeout ))
-                        }
-                        ///////////////////////////////
-                    }
-                }
-            }
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+        if let name = UserDefaults.standard.string(forKey: SettingKeys.name.rawValue){
+            self.debugLabel.text = "Start Scanning: \(name)"
             
-        }))
-        self.present(alert, animated: true, completion: nil)
+            self.manager = ESenseManager(deviceName: name, listener: self)
+            if let m = self.manager {
+                print(m.connect(timeout: self.connectionTimeout ))
+            }
+        }
     }
 }
 
@@ -109,11 +129,28 @@ extension ViewController:ESenseConnectionListener{
             manager.removeDeviceReadyHandler()
             self.connectButton.setTitle("Disconnect", for: .normal)
             self.debugLabel.text = "The connected eSense is ready"
-            if let config = self.sensorConfig{
-                 print(manager.setSensorConfig(config))
+            
+            let userDefaults = UserDefaults.standard
+            if let accRange = userDefaults.getAccRange(forKey: SettingKeys.accG.rawValue),
+                let gyroRange = userDefaults.getGyroRange(forKey: SettingKeys.gyroDEG.rawValue),
+                let accLPF = userDefaults.getAccLPF(forKey: SettingKeys.accLPF.rawValue),
+                let gyroLPF = userDefaults.getGyroLPF(forKey: SettingKeys.gyroLPF.rawValue){
+                self.sensorConfig = ESenseConfig.init(accRange: accRange,
+                                                      gyroRange: gyroRange,
+                                                      accLPF: accLPF,
+                                                      gyroLPF: gyroLPF)
+                if let config = self.sensorConfig{
+                    print(manager.setSensorConfig(config))
+                }
             }
+            
+            
             print(manager.registerEventListener(self))
-            print(manager.registerSensorListener(self, hz: self.sensingFrequency))
+            
+            let frequency = userDefaults.integer(forKey: SettingKeys.sensingFrequency.rawValue)
+            if frequency > 0 && frequency <= 100 {
+                print(manager.registerSensorListener(self, hz: UInt8(frequency)))
+            }
             
             // print(manager.getBatteryVoltage())
             // print(manager.getAdvertisementAndConnectionInterval())
@@ -128,6 +165,7 @@ extension ViewController:ESenseConnectionListener{
         print(#function)
         self.connectButton.setTitle("Connect", for: .normal)
         self.debugLabel.text = #function
+        self.sensorConfig = nil
     }
 }
 
@@ -161,17 +199,52 @@ extension ViewController:ESenseEventListener{
 extension ViewController:ESenseSensorListener{
     func onSensorChanged(_ evt: ESenseEvent) {
         if let config = self.sensorConfig {
+            // show accelerometer data
             let acc = evt.convertAccToG(config: config)
             updateLineChart(self.accView, acc)
             
+            // show gyroscope data
             let gyro = evt.convertGyroToDegPerSecond(config: config)
             updateLineChart(self.gyroView, gyro)
+            
+            if isSaveCSV {
+                // save acceleromeoter and gyroscope data
+                var documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                documentPath.appendPathComponent(self.fileName)
+                
+                if let stream = OutputStream(url: documentPath, append: true) {
+                    do{
+                        let csv = try CSVWriter(stream: stream)
+//                        if !exists {
+//                            try csv.write(row: ["timestamp", "name",
+//                                                 "acc-x",  "acc-y",  "acc-z",
+//                                                 "gyro-x", "gyro-y", "gyro-z",
+//                                                 "label"])
+//                            let data = [UInt8](csv.configuration.newline.utf8)
+//                            csv.stream.write(data, maxLength: data.count)
+//                        }
+                        
+                        try csv.write(row: [String(evt.getTimestamp()), self.sensorName,
+                                            String(acc[0]), String(acc[1]), String(acc[2]),
+                                            String(gyro[0]), String(gyro[1]), String(gyro[2]),
+                                            self.label])
+                        let data = [UInt8](csv.configuration.newline.utf8)
+                        csv.stream.write(data, maxLength: data.count)
+                        csv.stream.close()
+                    } catch CSVError.cannotOpenFile {
+                        print(CSVError.cannotOpenFile)
+                    } catch CSVError.cannotWriteStream{
+                        print(CSVError.cannotWriteStream)
+                    } catch {
+                        
+                    }
+                }
+            }
         }
     }
 }
 
 extension ViewController:ChartViewDelegate {
-    
     
     func lineDataWithCount(_ count: Int, labels:[String]) -> LineChartData {
         let yVals = (0..<count).map { i -> ChartDataEntry in
