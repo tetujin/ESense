@@ -32,7 +32,7 @@
 /* Begin PBXFileReference section */
 		2108776BEDC7EA4C33F86718 /* Pods_ESense_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ESense_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		23D52DDB380D93D133930F3B /* Pods-ESense_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ESense_Tests.debug.xcconfig"; path = "Target Support Files/Pods-ESense_Tests/Pods-ESense_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		28ADEB38844F331E85C51ADF /* ESense.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = ESense.podspec; path = ../ESense.podspec; sourceTree = "<group>"; };
+		28ADEB38844F331E85C51ADF /* ESense.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = ESense.podspec; path = ../ESense.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		3D578273D7B9E5546BFA1404 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		4F4B8871230524D500173D19 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		4F4B8891230CDB5F00173D19 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -502,7 +502,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yuukinishiyama.app.esense.client;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
@@ -519,7 +519,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yuukinishiyama.app.esense.client;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;

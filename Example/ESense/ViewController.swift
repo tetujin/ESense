@@ -46,8 +46,8 @@ class ViewController: UIViewController{
         }
         
         // Set a chart contents
-        setupLineChart(accView,  data: lineDataWithCount(300, labels: ["Acc-X","Acc-Y","Acc-Z"]))
-        setupLineChart(gyroView, data: lineDataWithCount(300, labels: ["Gyro-X","Gyro-Y","Gyro-Z"]))
+        setupLineChart(accView,  data: generateLineDataWithCount(300, labels: ["Acc-X","Acc-Y","Acc-Z"]))
+        setupLineChart(gyroView, data: generateLineDataWithCount(300, labels: ["Gyro-X","Gyro-Y","Gyro-Z"]))
     
     }
 
@@ -66,10 +66,6 @@ class ViewController: UIViewController{
         }else{
             self.startConnection()
         }
-    }
-    
-    @IBAction func didPushActionButton(_ sender: UIBarButtonItem) {
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -93,8 +89,6 @@ class ViewController: UIViewController{
             self.isSaveCSV = UserDefaults.standard.bool(forKey: SettingKeys.saveCSV.rawValue)
         }
     }
-    
-    
 }
 
 extension ViewController{
@@ -127,30 +121,33 @@ extension ViewController:ESenseConnectionListener{
         debugLabel.text = #function
         manager.setDeviceReadyHandler { peripheral in
             manager.removeDeviceReadyHandler()
+            
             self.connectButton.setTitle("Disconnect", for: .normal)
             self.debugLabel.text = "The connected eSense is ready"
             
+            // Get sensor configuration from UserDefaults
             let userDefaults = UserDefaults.standard
-            if let accRange = userDefaults.getAccRange(forKey: SettingKeys.accG.rawValue),
-                let gyroRange = userDefaults.getGyroRange(forKey: SettingKeys.gyroDEG.rawValue),
-                let accLPF = userDefaults.getAccLPF(forKey: SettingKeys.accLPF.rawValue),
-                let gyroLPF = userDefaults.getGyroLPF(forKey: SettingKeys.gyroLPF.rawValue){
+            if let accRange  = userDefaults.getAccRange(forKey:  SettingKeys.accG.rawValue),
+               let gyroRange = userDefaults.getGyroRange(forKey: SettingKeys.gyroDEG.rawValue),
+               let accLPF    = userDefaults.getAccLPF(forKey:    SettingKeys.accLPF.rawValue),
+               let gyroLPF   = userDefaults.getGyroLPF(forKey:   SettingKeys.gyroLPF.rawValue){
+                // Instance a sensor config
                 self.sensorConfig = ESenseConfig.init(accRange: accRange,
                                                       gyroRange: gyroRange,
                                                       accLPF: accLPF,
                                                       gyroLPF: gyroLPF)
                 if let config = self.sensorConfig{
+                    // set the sensor config to eSense via ESenseManager
                     print(manager.setSensorConfig(config))
                 }
             }
             
-            
+            // Set eSense event listener
             print(manager.registerEventListener(self))
             
+            // Set eSense sensor event listener
             let frequency = userDefaults.integer(forKey: SettingKeys.sensingFrequency.rawValue)
-            if frequency > 0 && frequency <= 100 {
-                print(manager.registerSensorListener(self, hz: UInt8(frequency)))
-            }
+            print(manager.registerSensorListener(self, hz: UInt8(frequency)))
             
             // print(manager.getBatteryVoltage())
             // print(manager.getAdvertisementAndConnectionInterval())
@@ -197,24 +194,28 @@ extension ViewController:ESenseEventListener{
 }
 
 extension ViewController:ESenseSensorListener{
+    
     func onSensorChanged(_ evt: ESenseEvent) {
         if let config = self.sensorConfig {
-            // show accelerometer data
-            let acc = evt.convertAccToG(config: config)
-            updateLineChart(self.accView, acc)
             
-            // show gyroscope data
+            let acc  = evt.convertAccToG(config: config)
             let gyro = evt.convertGyroToDegPerSecond(config: config)
-            updateLineChart(self.gyroView, gyro)
-            
+
+            if UIApplication.shared.applicationState == .active {
+                // show acc and gyro data
+                updateLineChart(self.accView, acc)
+                updateLineChart(self.gyroView, gyro)
+            }
+        
             if isSaveCSV {
                 // save acceleromeoter and gyroscope data
                 var documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
                 documentPath.appendPathComponent(self.fileName)
-                
+
                 if let stream = OutputStream(url: documentPath, append: true) {
                     do{
                         let csv = try CSVWriter(stream: stream)
+            
 //                        if !exists {
 //                            try csv.write(row: ["timestamp", "name",
 //                                                 "acc-x",  "acc-y",  "acc-z",
@@ -236,7 +237,7 @@ extension ViewController:ESenseSensorListener{
                     } catch CSVError.cannotWriteStream{
                         print(CSVError.cannotWriteStream)
                     } catch {
-                        
+                        print("Error at \(#function)")
                     }
                 }
             }
@@ -246,7 +247,7 @@ extension ViewController:ESenseSensorListener{
 
 extension ViewController:ChartViewDelegate {
     
-    func lineDataWithCount(_ count: Int, labels:[String]) -> LineChartData {
+    func generateLineDataWithCount(_ count: Int, labels:[String]) -> LineChartData {
         let yVals = (0..<count).map { i -> ChartDataEntry in
             return ChartDataEntry(x: Double(i), y: 0)
         }
