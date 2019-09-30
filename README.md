@@ -29,9 +29,9 @@ pod 'ESense'
 import ESense
 ```
 
-2. Implement `ESenseconnectionListener` on your class
+2. Implement `ESenseConnectionListener` on your class
 ```swift
-extension YOUR_CLASS:ESenseconnectionListener{
+extension YOUR_CLASS:ESenseConnectionListener{
     func onDeviceFound(_ manager: ESenseManager) {
         // YOUR CODE HERE
     }
@@ -59,14 +59,14 @@ Prepare a variable for `ESenseManager` as a class or static variable.
 ```swift
 var manager:ESenseManager? = nil
 ```
-Initialize an `ESenseManager` class using a target device name and a class which is implemented the `ESenseconnectionListener`.
+Initialize an `ESenseManager` class using a target device name and a class which is implemented the `ESenseConnectionListener`.
 ```swift
 manager = ESenseManager(deviceName: "YOUR_ESENSE_NAME", listener: YOUR_CLASS)
 ```
 
 4. Scan and connect an eSense device
 
-For scanning an _eSense_ device, you can use `scan(timeout)` method. If `ESenseManager` finds an eSense device, `onDeviceFind(manager)`  method on `ESenseconnectionListener` is called. 
+For scanning an _eSense_ device, you can use `scan(timeout)` method. If `ESenseManager` finds an eSense device, `onDeviceFind(manager)`  method on `ESenseConnectionListener` is called. 
 ```swift
 manager.scan(timeout: SECOND)
 ```
