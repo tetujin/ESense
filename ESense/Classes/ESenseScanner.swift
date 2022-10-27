@@ -87,7 +87,7 @@ public class ESenseScanner: NSObject, CBCentralManagerDelegate{
     
     
     public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        // print(peripheral)
+        print(peripheral)
         if let name = peripheral.name {
             if name == self.mDeviceName {
                 self.mDevice = peripheral

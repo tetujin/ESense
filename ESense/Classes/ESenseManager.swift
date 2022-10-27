@@ -524,7 +524,7 @@ extension ESenseManager:CBPeripheralDelegate{
             }
         }else if c.uuid == BATTERY_CHARACTERISTIC {
             if let data = c.value {
-                var bytes = [UInt8](data)
+                let bytes = [UInt8](data)
                 if let listener = self.mEventListener{
                     if (checkCheckSum(bytes, 1)) {
                         let vol:Double = Double(Int(bytes[3] & 0xff) * 256 + Int(bytes[4] & 0xff)) / 1000.0
@@ -534,7 +534,7 @@ extension ESenseManager:CBPeripheralDelegate{
             }
         }else if c.uuid == SENSOR_CHARACTERISTIC{
             if let data = c.value {
-                var bytes = [UInt8](data)
+                let bytes = [UInt8](data)
                 // print(bytes)
                 if(checkCheckSum(bytes, 2)) {
                     var acc:[Int16]  = [0,0,0]
@@ -559,7 +559,7 @@ extension ESenseManager:CBPeripheralDelegate{
         } else if c.uuid == BUTTON_CHARACTERISTIC {
             if let listener = self.mEventListener {
                 if let data = c.value {
-                    var bytes = [UInt8](data)
+                    let bytes = [UInt8](data)
                     if(checkCheckSum(bytes,1)) {
                         let value:UInt8 = bytes[3];
                         listener.onButtonEventChanged(value == 1);

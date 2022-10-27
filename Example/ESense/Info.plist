@@ -24,6 +24,10 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>eSense client needs to access Bluetooth always to receive sensor data from ear earbuds.</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>eSense client needs to access Bluetooth always to receive sensor data from ear earbuds.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>bluetooth-central</string>
